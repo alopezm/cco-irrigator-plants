@@ -6,7 +6,7 @@ import { HardwareService } from './hardware/hardware.service';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly hardwareService: HardwareService,  
+    private readonly hardwareService: HardwareService,
   ) {}
 
   @Get()
@@ -14,13 +14,13 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post('/on')
+  @Get('/on')
   async turnOn(): Promise<string> {
-    return await this.hardwareService.turnOn()
+    return await this.hardwareService.turnOn();
   }
 
-  @Post('/off')
+  @Get('/off')
   async turnOff(): Promise<string> {
-    return await this.hardwareService.turnOff()
+    return await this.hardwareService.turnOff();
   }
 }

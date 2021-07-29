@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { HardwareService } from './hardware.service'
-
+import { HardwareService } from './hardware.service';
 
 @Module({
   imports: [],
