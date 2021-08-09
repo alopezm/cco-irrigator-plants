@@ -8,6 +8,8 @@ export class HardwareService {
   private motorStatus$: Subject<boolean>;
   constructor() {
     const board = new Board({ repl: false });
+    // TODO: cehck if we can use BehaviorSubject instead of 2 subjects
+    // https://rxjs.dev/guide/subject#behaviorsubject
     this.motorSignal$ = new Subject();
     this.motorStatus$ = new Subject();
 
