@@ -64,27 +64,35 @@ export class SchedulerService {
       where: { enabled: true } 
     });
 
-    return schedulers.map(scheduler => {
+    const result = schedulers.map(scheduler => {
       const startDate = new Date();
       const endDate = new Date();
       const [startTimeHour, startTimeMinute] = scheduler.startHour.split(':');
       const [endTimeHour, endTimeMinute] = scheduler.endHour.split(':');
       startDate.setHours(parseInt(startTimeHour), parseInt(startTimeMinute));
       endDate.setHours(parseInt(endTimeHour), parseInt(endTimeMinute));
-      return {
+      const formattedSchedule = {
         ...scheduler,
         startDate: startDate,
         endDate: endDate,
-      }    
+      }
+      return formattedSchedule;
     }).filter(scheduler => {
       const now = new Date();
-      return now >= scheduler.startDate && now <= scheduler.endDate;
+      const shouldTurnOn = now >= scheduler.startDate && now <= scheduler.endDate;
+
+      return shouldTurnOn;
     })
-  
+
+    return result;
   }
 
   @Cron('59 * * * * *')
   async executeScheduler() {
+    if (!this.hardwareService.isReady()) {
+      return;
+    }
+
     const onSchedulers = await this.getOnScheduler()
     if(onSchedulers.length > 0) {
       await this.hardwareService.turnOn();
@@ -93,5 +101,4 @@ export class SchedulerService {
       await this.hardwareService.turnOff();
     }
   }
-  
 }
