@@ -26,7 +26,7 @@ export class SchedulerService {
     });
   }
 
-  async deleteScheduler(id: number) {
+  async deleteScheduler(id: string) {
     return await this.schedulerRepository.delete(id);
   }
 
@@ -40,7 +40,7 @@ export class SchedulerService {
     endHour,
     enabled,
   }: {
-    id: number;
+    id: string;
     startHour?: string;
     endHour?: string;
     enabled?: boolean;
@@ -52,7 +52,7 @@ export class SchedulerService {
     });
   }
 
-  async getSchedulerById(id: number) {
+  async getSchedulerById(id: string) {
     return await this.schedulerRepository.findOneBy({ id });
   }
 
