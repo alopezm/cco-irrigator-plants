@@ -103,4 +103,4 @@ dist
 # TernJS port file
 .tern-port
 
-./server/irrigator-plants.db
+server/irrigator-plants.db
