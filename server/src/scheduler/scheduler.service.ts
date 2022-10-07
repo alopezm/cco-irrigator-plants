@@ -1,9 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { Cron } from "@nestjs/schedule";
-import { InjectRepository } from "@nestjs/typeorm";
+import { InjectRepository } from '@nestjs/typeorm';
 import { HardwareService } from "src/hardware/hardware.service";
-import { Repository } from "typeorm";
-import { Scheduler } from "./scheduler.entity";
+import { Repository } from 'typeorm';
+import { Scheduler } from './scheduler.entity';
 
 @Injectable()
 export class SchedulerService {
@@ -13,24 +13,50 @@ export class SchedulerService {
     private hardwareService: HardwareService,
   ) {}
 
-  async createScheduler() {
-    // return this.schedulerRepository.save();
+  async createScheduler({
+    startHour,
+    endHour,
+    enabled,
+  }: {
+    startHour: string;
+    endHour: string;
+    enabled?: boolean;
+  }) {
+    return await this.schedulerRepository.save({
+      startHour,
+      endHour,
+      enabled,
+    });
   }
 
-  async deleteScheduler() {
-    // return this.schedulerRepository.delete();
+  async deleteScheduler(id: number) {
+    return await this.schedulerRepository.delete(id);
   }
 
   async getAllSchedulers() {
-    // return this.schedulerRepository.find();
+    return await this.schedulerRepository.find();
   }
 
-  async updateScheduler() {
-    // return this.schedulerRepository.update();
+  async updateScheduler({
+    id,
+    startHour,
+    endHour,
+    enabled,
+  }: {
+    id: number;
+    startHour?: string;
+    endHour?: string;
+    enabled?: boolean;
+  }) {
+    return await this.schedulerRepository.update(id, {
+      startHour,
+      endHour,
+      enabled,
+    });
   }
 
-  async getSchedulerById() {
-    // return this.schedulerRepository.findOne();
+  async getSchedulerById(id: number) {
+    return await this.schedulerRepository.findOneBy({ id });
   }
 
   private async getOnScheduler() {

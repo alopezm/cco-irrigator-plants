@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HardwareModule } from './hardware/hardware.module';
 import { HardwareService } from './hardware/hardware.service';
-import { Scheduler } from './scheduler/scheduler.entity';
 import { SchedulerModule } from './scheduler/scheduler.module';
 
 @Module({
@@ -13,9 +12,8 @@ import { SchedulerModule } from './scheduler/scheduler.module';
     SchedulerModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'shoppingDB',
-      // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      entities: [Scheduler],
+      database: 'irrigator-plants.db',
+      autoLoadEntities: true,
       synchronize: true,
     }),
   ],
