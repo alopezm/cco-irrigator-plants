@@ -9,7 +9,7 @@ import {
 @Entity()
 export class Scheduler {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column()
   startHour: string;

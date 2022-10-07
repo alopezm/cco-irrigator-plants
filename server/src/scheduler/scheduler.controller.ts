@@ -6,7 +6,7 @@ export class SchedulerController {
   constructor(private readonly schedulerService: SchedulerService) {}
 
   @Get(':id')
-  async getScheduler(@Param('id') id: number) {
+  async getScheduler(@Param('id') id: string) {
     const scheduler = await this.schedulerService.getSchedulerById(id);
     return scheduler;
   }
@@ -19,10 +19,10 @@ export class SchedulerController {
 
   @Patch(':id')
   async updateScheduler(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body('startHour') startHour?: string,
     @Body('endHour') endHour?: string,
-    @Body('enabled') enabled?: boolean
+    @Body('enabled') enabled?: boolean,
   ) {
     const scheduler = await this.schedulerService.updateScheduler({
       id,
@@ -46,7 +46,7 @@ export class SchedulerController {
   }
 
   @Delete(':id')
-  async deleteScheduler(@Param('id') id: number) {
+  async deleteScheduler(@Param('id') id: string) {
     const scheduler = await this.schedulerService.deleteScheduler(id);
     return scheduler;
   }
