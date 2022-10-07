@@ -85,7 +85,6 @@ export class SchedulerService {
 
   @Cron('60 * * * * *')
   async executeScheduler() {
-    // TODO: implement this
     const onSchedulers = await this.getOnScheduler()
     if(onSchedulers.length > 0) {
       await this.hardwareService.turnOn();
