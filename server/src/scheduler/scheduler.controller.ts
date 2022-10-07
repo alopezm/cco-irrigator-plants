@@ -1,4 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { CreateSchedulerDto } from './dto/create-scheduler.dto';
+import { UpdateSchedulerDto } from './dto/update-scheduler.dto';
 import { SchedulerService } from './scheduler.service';
 
 @Controller('scheduler')
@@ -20,10 +22,9 @@ export class SchedulerController {
   @Patch(':id')
   async updateScheduler(
     @Param('id') id: string,
-    @Body('startHour') startHour?: string,
-    @Body('endHour') endHour?: string,
-    @Body('enabled') enabled?: boolean,
+    @Body() body: UpdateSchedulerDto,
   ) {
+    const { startHour, endHour, enabled } = body;
     const scheduler = await this.schedulerService.updateScheduler({
       id,
       startHour,
@@ -34,13 +35,12 @@ export class SchedulerController {
   }
 
   @Post()
-  async createScheduler(
-    @Body('startHour') startHour: string,
-    @Body('endHour') endHour: string,
-  ) {
+  async createScheduler(@Body() body: CreateSchedulerDto) {
+    const { startHour, endHour, enabled } = body;
     const scheduler = await this.schedulerService.createScheduler({
       startHour,
       endHour,
+      enabled,
     });
     return scheduler;
   }
