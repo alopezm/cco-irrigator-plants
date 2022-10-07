@@ -83,7 +83,7 @@ export class SchedulerService {
   
   }
 
-  @Cron('45 * * * * *')
+  @Cron('59 * * * * *')
   async executeScheduler() {
     const onSchedulers = await this.getOnScheduler()
     if(onSchedulers.length > 0) {

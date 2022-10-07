@@ -21,6 +21,7 @@ export class HardwareService {
 
         motor.query((pinState) => {
           this.motorStatus$.next(pinState.value !== 0);
+          console.log('motor status', pinState.value !== 0);
         });
       });
     });
