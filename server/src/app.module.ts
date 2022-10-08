@@ -3,20 +3,20 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { HardwareModule } from './hardware/hardware.module';
-import { Scheduler } from './scheduler/scheduler.entity';
-import { SchedulerModule } from './scheduler/scheduler.module';
+import { TimeSlot } from './time-slot/time-slot.entity';
+import { TimeSlotModule } from './time-slot/time-slot.module';
 
 @Module({
   imports: [
     HardwareModule,
-    SchedulerModule,
+    TimeSlotModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'irrigator-plants.db',
-      entities: [Scheduler],
+      entities: [TimeSlot],
       synchronize: true,
     }),
-    ScheduleModule.forRoot()
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
 })

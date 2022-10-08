@@ -5,16 +5,14 @@ import {
   IsBoolean,
 } from 'class-validator';
 
-export class UpdateSchedulerDto {
-  @IsOptional()
+export class CreateTImeSlotDto {
   @IsMilitaryTime()
   @IsString()
-  startHour?: string;
+  startHour: string;
 
-  @IsOptional()
   @IsMilitaryTime()
   @IsString()
-  endHour?: string;
+  endHour: string;
 
   @IsOptional()
   @IsBoolean()

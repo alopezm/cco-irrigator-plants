@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Scheduler {
+export class TimeSlot {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
